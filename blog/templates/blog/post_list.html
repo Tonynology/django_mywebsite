@@ -1,8 +1,16 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Blog</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'blog/assets/css/custom.min.css' %}" media="screen">
+
+
 </head>
 <body>
 <h1>BlogBlog</h1>
@@ -13,5 +21,11 @@
 <h4>{{ p.created }} by {{ p.author}}</h4>
 <p>{{ p.content }}</p>
 {% endfor %}
+
+    <script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'blog/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/assets/js/custom.js' %}"></script>
+
 </body>
 </html>
