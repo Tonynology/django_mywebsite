@@ -11,3 +11,7 @@ class Post(models.Model):
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)  #글 저자
 #장고는 admin 페이지를 자동으로 만든다.
+
+
+    def __str__(self):
+        return '{} :: {}'.format(self.title, self.author)
