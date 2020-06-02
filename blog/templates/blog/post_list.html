@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" id="navbar">
     <div class="container">
         <a href="../" class="navbar-brand">django Blog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
                     <a class="nav-link" href="../blog/">Blog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about me/">about me</a>
+                    <a class="nav-link" href="/About me/">About me</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="download">Simplex <span class="caret"></span></a>
@@ -77,43 +77,47 @@
 <div class="container">
 
     <div class="row">
-
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
             <h1 class="my-4">Blog</h1>
 
-            {% for p in object_list %}
-            <!-- Blog Post -->
-            <div class="card mb-4">
-                {% if p.head_image %}
-                <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
-                {% else %}
-                <img class="card-img-top" src="https://i.picsum.photos/id/237/750/300.jpg" alt="Card image cap">
-                {% endif %}
+            {% if object_list.exists %}
+                {% for p in object_list %}
+                    <!-- Blog Post -->
+                    <div class="card mb-4">
+                        {% if p.head_image %}
+                        <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
+                        {% else %}
+                        <img class="card-img-top" src="https://i.picsum.photos/id/237/750/300.jpg" alt="Card image cap">
+                        {% endif %}
 
-                <div class="card-body">
-                    <h2 class="card-title">{{ p.title }}</h2>
-                    <p class="card-text">{{ p.content | truncatewords:50}}</p>
-                    <a href="#" class="btn btn-primary">Read More &rarr;</a>
-                </div>
-                <div class="card-footer text-muted">
-                    Posted on {{ p.created }} by
-                    <a href="#">{{ p.author }}</a>
-                </div>
-            </div>
-            {% endfor %}
+                        <div class="card-body">
+                            <h2 class="card-title">{{ p.title }}</h2>
+                            <p class="card-text">{{ p.content | truncatewords:50}}</p>
+                            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            Posted on {{ p.created }} by
+                            <a href="#">{{ p.author }}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                    <h3>아직 게시물이 없습니다.</h3>
+            {% endif %}
 
 
-<!--            &lt;!&ndash; Pagination &ndash;&gt;-->
-<!--            <ul class="pagination justify-content-center mb-4">-->
-<!--                <li class="page-item">-->
-<!--                    <a class="page-link" href="#">&larr; Older</a>-->
-<!--                </li>-->
-<!--                <li class="page-item disabled">-->
-<!--                    <a class="page-link" href="#">Newer &rarr;</a>-->
-<!--                </li>-->
-<!--            </ul>-->
+
+            <!--            &lt;!&ndash; Pagination &ndash;&gt;-->
+            <!--            <ul class="pagination justify-content-center mb-4">-->
+            <!--                <li class="page-item">-->
+            <!--                    <a class="page-link" href="#">&larr; Older</a>-->
+            <!--                </li>-->
+            <!--                <li class="page-item disabled">-->
+            <!--                    <a class="page-link" href="#">Newer &rarr;</a>-->
+            <!--                </li>-->
+            <!--            </ul>-->
 
         </div>
 
