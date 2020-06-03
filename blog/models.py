@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Category(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    description = models.TextField(blank=True)
 
-# Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=30) #제목
     content = models.TextField()   #내용
@@ -12,6 +14,9 @@ class Post(models.Model):
     created = models.DateTimeField()  #작성 날,시간
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)  #글 저자
+
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
+
 #장고는 admin 페이지를 자동으로 만든다.
 
 
@@ -20,3 +25,5 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/blog/{}/'.format(self.pk)
+
+
