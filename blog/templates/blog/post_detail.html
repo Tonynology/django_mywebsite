@@ -26,6 +26,12 @@
 
 <!-- Post Content -->
 {{ object.content }}
+<br/>
+
+{% for tag in object.tags.all %} <!-- object 는 블로그 post를 지칭한다. -->
+    <a href="{{ tag_get_absolute_url }}">#{{ tag }}</a>
+{% endfor %}
+
 <hr>
 
 <!-- Comments Form -->
