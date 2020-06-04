@@ -16,6 +16,14 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
 
+class Tag(models.Model):
+    name = models.CharField(max_length=40, unique=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=30) #제목
     content = models.TextField()   #내용
@@ -28,6 +36,7 @@ class Post(models.Model):
 
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
+    tags = models.ManyToManyField(Tag)
 #장고는 admin 페이지를 자동으로 만든다.
 
 
