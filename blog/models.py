@@ -41,7 +41,7 @@ class Post(models.Model):
 
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
-    tags = models.ManyToManyField(Tag, blank=True, null=True) #require가 아닌 목록은 blank 해야함
+    tags = models.ManyToManyField(Tag, blank=True) #require가 아닌 목록은 blank 해야함
 #장고는 admin 페이지를 자동으로 만든다.
 
 
@@ -50,6 +50,9 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/blog/{}/'.format(self.pk)
+
+    def get_update_url(self):
+        return self.get_absolute_url() + 'update/'
 
     def get_markdown_content(self):
         return markdown(self.content)
