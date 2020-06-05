@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from markdownx.models import MarkdownxField
+from markdownx.utils import markdown
+
 
 class Category(models.Model):
     name = models.CharField(max_length=25, unique=True)
@@ -28,7 +31,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=30) #제목
-    content = models.TextField()   #내용
+    content = MarkdownxField()   #내용
 
     head_image = models.ImageField(upload_to='blog/%Y%m%d/', blank=True)
 
@@ -38,7 +41,7 @@ class Post(models.Model):
 
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True, null=True) #require가 아닌 목록은 blank 해야함
 #장고는 admin 페이지를 자동으로 만든다.
 
 
@@ -48,4 +51,5 @@ class Post(models.Model):
     def get_absolute_url(self):
         return '/blog/{}/'.format(self.pk)
 
-
+    def get_markdown_content(self):
+        return markdown(self.content)
