@@ -35,7 +35,7 @@ class Post(models.Model):
 
     head_image = models.ImageField(upload_to='blog/%Y%m%d/', blank=True)
 
-    created = models.DateTimeField()  #작성 날,시간
+    created = models.DateTimeField(auto_now=True)  #작성 날,시간
 
     author = models.ForeignKey(User, on_delete=models.CASCADE)  #글 저자
 
