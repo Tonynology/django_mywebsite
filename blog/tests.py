@@ -290,8 +290,8 @@ class TestView(TestCase):
         self.assertIn('delete', comment_000_div.text)
 
         comment_001_div = comments_div.find('div', id='comment-id-{}'.format(comment_001.pk))
-        self.assertIn('edit', comment_001_div.text)
-        self.assertIn('delete', comment_001_div.text)
+        self.assertNotIn('edit', comment_001_div.text)
+        self.assertNotIn('delete', comment_001_div.text)
 
     def test_post_list_by_category(self):
         category_politics = create_category(name='정치/사회')
