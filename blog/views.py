@@ -110,21 +110,32 @@ def new_comment(request, pk):
         return redirect('/blog/')
 
 
-class CommentDelete(DeleteView):
+# class CommentDelete(DeleteView):
+#     model = Comment
+#
+#     def get_object(self, queryset=None):
+#         comment = super(CommentDelete, self).get_object()  #super는 DeleteView에서 불러오는것
+#         if comment.author != self.request.user:
+#             raise PermissionError('Comment 삭제 권한이 없습니다')
+#         return comment
+#
+#     def get_success_url(self):
+#         post = self.get_object().post
+#         return post.get_absolute_url() + '#comment-list'
+#
+
+class CommentUpdate(UpdateView):
     model = Comment
+    form_class = CommentForm
 
     def get_object(self, queryset=None):
-        comment = super(CommentDelete, self).get_object()  #super는 DeleteView에서 불러오는것
+        comment = super(CommentUpdate, self).get_object()
         if comment.author != self.request.user:
-            raise PermissionError('Comment 삭제 권한이 없습니다')
+            raise PermissionError('Comment 수정 권한이 없습니다.')
+
         return comment
 
-    def get_success_url(self):
-        post = self.get_object().post
-        return post.get_absolute_url() + '#comment-list'
-
-
-def delete_comment(request, pk):
+def delete_comment(request, pk):        # Function Based view
     comment = Comment.objects.get(pk=pk)
     post = comment.post
 
