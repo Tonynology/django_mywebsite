@@ -445,9 +445,10 @@ class TestView(TestCase):
         login_success = self.client.login(username='smith', password='nopassword')
         self.assertTrue(login_success)
         #로그인을 다른사람으로 했을때
-        response = self.client.get('/blog/delete_comment/{}/'.format(comment_000.pk), follow=True)
-        self.assertEqual(Comment.objects.count(), 2)
-        self.assertEqual(post_000.comment_set.count(), 2)
+        with self.assertRaises(PermissionError):
+            response = self.client.get('/blog/delete_comment/{}/'.format(comment_000.pk), follow=True)
+            self.assertEqual(Comment.objects.count(), 2)
+            self.assertEqual(post_000.comment_set.count(), 2)
 
         login_success = self.client.login(username='obama', password='nopassword')
         response = self.client.get('/blog/delete_comment/{}/'.format(comment_000.pk), follow=True)

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Post, Category, Tag, Comment
 from .forms import CommentForm
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class PostList(ListView):
@@ -110,6 +110,20 @@ def new_comment(request, pk):
         return redirect('/blog/')
 
 
+class CommentDelete(DeleteView):
+    model = Comment
+
+    def get_object(self, queryset=None):
+        comment = super(CommentDelete, self).get_object()  #super는 DeleteView에서 불러오는것
+        if comment.author != self.request.user:
+            raise PermissionError('Comment 삭제 권한이 없습니다')
+        return comment
+
+    def get_success_url(self):
+        post = self.get_object().post
+        return post.get_absolute_url() + '#comment-list'
+
+
 def delete_comment(request, pk):
     comment = Comment.objects.get(pk=pk)
     post = comment.post
@@ -119,7 +133,23 @@ def delete_comment(request, pk):
         comment.delete()
         return redirect(post.get_absolute_url() + '#comment-list')
     else:
-        return redirect('/blog/')
+        raise PermissionError('Comment 삭제 권한이 없습니다.')
+        # return redirect('/blog/')
+
+
+
+    # class CommentDelete(DeleteView):
+    #     model = Comment
+    #
+    #     def get_object(self, queryset=None):
+    #         comment = super(CommentDelete, self).get_object()  # super는 DeleteView에서 불러오는것
+    #         if comment.author != self.request.user:
+    #             raise PermissionError('Comment 삭제 권한이 없습니다')
+    #         return comment
+    #
+    #     def get_success_url(self):
+    #         post = self.get_object().post
+    #         return post.get_absolute_url() + '#comment-list'
 
     # def post_detail(request, pk):
     #     blog_post = Post.objects.get(pk=pk)  #하나만 가져올땐 get을 쓴다.
