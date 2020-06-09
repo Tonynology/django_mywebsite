@@ -42,6 +42,9 @@ class Post(models.Model):
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
     tags = models.ManyToManyField(Tag, blank=True) #require가 아닌 목록은 blank 해야함
+
+    class Meta:
+        ordering = ['-created']
 #장고는 admin 페이지를 자동으로 만든다.
 
 
