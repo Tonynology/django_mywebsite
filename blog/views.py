@@ -3,6 +3,7 @@ from .models import Post, Category, Tag, Comment
 from .forms import CommentForm
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 
 class PostList(ListView):
     model = Post
@@ -14,6 +15,13 @@ class PostList(ListView):
         context['posts_without_category'] = Post.objects.filter(category=None).count()   #filter()는 특정조건에 해당할때
 
         return context
+
+class PostSearch(PostList):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        object_list = Post.objects.filter(Q(title__contains=q) | Q(content__contains=q))
+        return object_list
+
 
 class PostDetail(DetailView):
     model = Post
