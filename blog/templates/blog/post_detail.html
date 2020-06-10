@@ -43,7 +43,7 @@
 <br/>
 
 {% for tag in object.tags.all %} <!-- object 는 블로그 post를 지칭한다. -->
-<a href="{{ tag_get_absolute_url }}">#{{ tag }}</a>
+<a href="{{ tag.get_absolute_url }}">#{{ tag }}</a>
 {% endfor %}
 
 <hr>
