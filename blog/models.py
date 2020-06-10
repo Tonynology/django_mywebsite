@@ -41,7 +41,7 @@ class Post(models.Model):
 
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
-    tags = models.ManyToManyField(Tag, null=True, blank=True) #require가 아닌 목록은 blank 해야함
+    tags = models.ManyToManyField(Tag, blank=True) #require가 아닌 목록은 blank 해야함
 
     class Meta:
         ordering = ['-created']

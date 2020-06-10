@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Blog{% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'blog/assets/css/custom.min.css' %}" media="screen">
+    <script src="https://kit.fontawesome.com/f284a7c950.js"crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+{% include 'basecamp/navbar.html' %}
+
+
+{% block content %}
+{% endblock %}
+
+<!--    <script>-->
+<!--        function search_post(){-->
+<!--            var search_value = document.getElementById('search-input').value;-->
+<!--            location.href="/blog/search/" + search_value + "/"-->
+<!--        }-->
+
+<!--        function wait_for_enterkey(){-->
+<!--        if (window.event.keyCode == 13)      &lt;!&ndash; 13 = ENTER key &ndash;&gt;-->
+<!--            search_post()-->
+<!--        }-->
+
+<!--    </script>-->
+
+    <script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'blog/assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'blog/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'blog/assets/js/custom.js' %}"></script>
+
+</body>
+</html>
