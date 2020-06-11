@@ -25,7 +25,7 @@ SECRET_KEY = 'x1mlajy!1e+&nu=o7=y2x4da%)3b!1^)10*rub+z2!sbw)+2ac'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['149.28.13.183', '127.0.0.1']
+ALLOWED_HOSTS = ['149.28.13.183', '127.0.0.1', 'tonymoon.me', 'www.tonymoon.me']
 
 
 # Application definition
