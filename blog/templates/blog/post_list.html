@@ -1,7 +1,7 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-{% if user.is_authenticated %}
+{% if user.is_superuser %}
 <button class="btn btn-primary btn-sm float-right" onclick="location.href='/blog/create/'">New Post</button>
 {% endif %}
 <h1 id="blog-list-title">
@@ -27,7 +27,7 @@
         <span class="badge badge-primary float-right">미분류</span>
         {% endif %}
         <h2 class="card-title">{{ p.title }}</h2>
-        <p class="card-text">{{ p.content | truncatewords:50}}</p>
+        <p class="card-text">{{ p.get_markdown_content | striptags | truncatewords:50}}</p>
 
         {% for tag in p.tags.all %}     <!-- templet 안에서는 ()는 안쓴다. -->
         <a href="{{ tag.get_absolute_url }}">#{{ tag }} </a>

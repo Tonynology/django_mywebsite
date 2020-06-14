@@ -80,6 +80,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'my_site_prj.wsgi.application'
 
 
