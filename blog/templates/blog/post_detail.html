@@ -83,7 +83,7 @@
             <button class="btn btn-sm btn-warning float-right" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">delete</button>
             {% endif %}
             <h5 class="mt-0">{{ comment.author }} <small class="text-muted">{{ comment.created_at }}</small></h5>
-            {{ comment.get_markdown_content | safe}}
+            {{ comment.text | linebreaks}}
         </div>
     </div>
     {% endfor %}
