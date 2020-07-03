@@ -21,7 +21,8 @@ from django.conf import settings
 urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
-    path('markdownx/', include('markdownx.urls')),
+    path('ckdeditor/', include('ckeditor_uploader.urls')),
+    # path('markdownx/', include('markdownx.urls')),
     path('accounts/', include('allauth.urls')),
     path('', include('basecamp.urls')),
 ]

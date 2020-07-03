@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from django.conf import settings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,6 +31,7 @@ ALLOWED_HOSTS = ['149.28.13.183', '127.0.0.1', 'tonymoon.me', 'www.tonymoon.me']
 
 # Application definition
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+
+
     'allauth.socialaccount.providers.google',
 
     'markdownx',
@@ -50,7 +54,12 @@ INSTALLED_APPS = [
 
     'blog',
     'basecamp',
+
+    'ckeditor',
+    'ckeditor_uploader',
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -141,6 +150,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = 'static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, '_media')
 MEDIA_URL = '/media/'
@@ -153,3 +163,42 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/blog/'
 LOGOUT_REDIRECT_URL = '/blog/6/'
+
+CKEDITOR_CONFIGS = {
+    # django-ckeditor defaults
+    'default': {
+        # Editor Width Adaptation
+        # 'width':'500px',
+        'height':'500px',
+        # tab key conversion space number
+        'tabSpaces': 4,
+        # Toolbar Style
+        'toolbar': 'Custom',
+        # Toolbar buttons
+        'toolbar_Custom': [
+            # Emotional Code Block
+            ['Styles', 'CodeSnippet'],
+            # Font Style
+            ['Bold', 'Italic', 'Underline', 'Strick', 'SpellCheker', 'RemoveFormat', 'Blockquote'],
+            # Font color
+            ['TextColor', 'BGColor'],
+            #Link link
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Flash', 'Table', 'HorizontalRule'],
+            #List of items
+            ['NumberedList', 'BulletedList'],
+            #Maximization
+            ['Smiley', 'SpecialChar'],
+            ['Source'],
+        ],
+        # Add Code Block Plug-ins
+        'extraPlugins': 'codesnippet',
+    },
+    'special': {
+        'toolbar': 'Special',
+        'toolbar_Special': [
+            ['Bold', 'CodeSnippet'],
+        ],
+        'extraPlugins': 'codesnippet',
+    }
+}

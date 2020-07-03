@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdown
+# from ckeditor.fields import RichTextField
 
+from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     name = models.CharField(max_length=25, unique=True)
@@ -31,7 +33,10 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=30) #제목
-    content = MarkdownxField()   #내용
+    # content = MarkdownxField()   #내용
+    # content = RichTextField()  # 내용
+    content = RichTextUploadingField(blank = True, null=True)  # 내용
+    content2 = RichTextUploadingField(blank = True, null=True, config_name='special')  # 내용
 
     head_image = models.ImageField(upload_to='blog/%Y%m%d/', blank=True)
 

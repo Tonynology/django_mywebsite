@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'blog/assets/css/custom.min.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/f284a7c950.js"crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet"
+          href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/tomorrow-night-bright.min.css">
+
+<!--    <pre class="css" style="font-size: 50px;">-->
+
+<!--    </pre>-->
 </head>
 <body>
 
@@ -18,13 +30,13 @@
 <div class="container">
     <div class="row">
         <!-- Blog Entries Column -->
-        <div class="col-md-8" id="main-div">
+        <div class="col-md-9" id="main-div"  style="font-size: 18px;">
             {% block content %}
             {% endblock %}
         </div>
 
         <!-- Sidebar Widgets Column -->
-        <div class="col-md-4" id="side-div">
+        <div class="col-md-3" id="side-div" >
 
             <!-- Search Widget -->
             <div class="card my-4">
