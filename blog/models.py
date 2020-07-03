@@ -36,7 +36,6 @@ class Post(models.Model):
     # content = MarkdownxField()   #내용
     # content = RichTextField()  # 내용
     content = RichTextUploadingField(blank = True, null=True)  # 내용
-    content2 = RichTextUploadingField(blank = True, null=True, config_name='special')  # 내용
 
     head_image = models.ImageField(upload_to='blog/%Y%m%d/', blank=True)
 
